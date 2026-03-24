@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  # mesh-generator:
+  #   build: ./mesh-generator
+  #   container_name: mesh-generator
+  #   ports:
+  #     - "8001:8000"
+
+  pattern-estimator:
+    build: ./pattern-generator
+    environment:
+      - PYTHONPATH=/workspace/Garment-Pattern-Generator/packages
+    volumes:
+      - ./pattern-generator/Garment-Pattern-Estimation:/workspace/Garment-Pattern-Estimation
+      - ./pattern-generator/Garment-Pattern-Generator:/workspace/Garment-Pattern-Generator
+    working_dir: /workspace/Garment-Pattern-Estimation
+    ports:
+      - "8002:8000"
+    tty: true

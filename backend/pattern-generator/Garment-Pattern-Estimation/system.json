@@ -1,0 +1,5 @@
+{
+  "output": "./outputs",
+  "datasets_path": "/Users/maseiyou/Garments_dataset",
+  "wandb_username": ""
+}
