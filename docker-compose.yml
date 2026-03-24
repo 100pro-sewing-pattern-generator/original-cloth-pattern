@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend:/app/frontend
+    working_dir: /app/frontend
+    ports:
+      - "5173:5173"
+    command: npm run dev -- --host 0.0.0.0
+
+  # mesh-generator:
+  #   build: ./mesh-generator
+  #   container_name: mesh-generator
+  #   ports:
+  #     - "8001:8000"
+
+  pattern-estimator:
+    build: ./backend/pattern-generator
+    environment:
+      - PYTHONPATH=/workspace/Garment-Pattern-Generator/packages
+    volumes:
+      - ./backend/pattern-generator/Garment-Pattern-Estimation:/workspace/Garment-Pattern-Estimation
+      - ./backend/pattern-generator/Garment-Pattern-Generator:/workspace/Garment-Pattern-Generator
+    working_dir: /workspace/Garment-Pattern-Estimation
+    ports:
+      - "8002:8000"
+    tty: true
