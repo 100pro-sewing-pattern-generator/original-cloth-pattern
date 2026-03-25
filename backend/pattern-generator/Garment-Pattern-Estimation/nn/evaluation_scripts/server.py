@@ -1,5 +1,7 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+
 from pathlib import Path
 import shutil
 import torch
@@ -52,6 +54,15 @@ def scale_obj(input_path, output_path, sample_path="sample.obj"):
 # FastAPI
 # -------------------------------
 app = FastAPI()
+origins = ["http://localhost:5173"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # または ["*"] で全て許可
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # -------------------------------
 # 出力フォルダ
@@ -171,21 +182,13 @@ async def predict(file: UploadFile = File(...)):
         in shape_experiment.NN_config()["loss"]["loss_components"],
     )
 
-    # -------------------------------
-    # zip作成
-    # -------------------------------
-    zip_path = run_dir / "pattern.zip"
-
-    with zipfile.ZipFile(zip_path, "w") as zipf:
-        for f in save_dir.rglob("*"):
-            if f.is_file():
-                zipf.write(f, f.relative_to(save_dir))
+    svg_file = save_dir / "tpose/tpose_pattern.svg"
 
     # -------------------------------
     # download
     # -------------------------------
     return FileResponse(
-        zip_path,
-        media_type="application/zip",
-        filename="pattern.zip"
+        svg_file,
+        media_type="image/svg+xml",
+        filename=svg_file.name
     )
