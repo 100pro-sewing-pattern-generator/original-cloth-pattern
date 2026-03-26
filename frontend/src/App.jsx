@@ -108,7 +108,7 @@ export default function App() {
         {/* 中: OBJ */}
         <div
           style={{
-            flex: 1,
+            height: "400px",
             border: "1px solid #ccc",
             borderRadius: "8px",
             overflow: "hidden",
