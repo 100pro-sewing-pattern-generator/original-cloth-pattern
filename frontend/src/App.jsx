@@ -107,7 +107,6 @@ export default function App() {
           <input type="file" accept="image/*" onChange={handleUploadImg} />
         </div>
 
-        {/* 中: OBJ */}
         <div
           style={{
             width: "400px",
@@ -117,30 +116,28 @@ export default function App() {
             overflow: "hidden",
           }}
         >
-          {objText ? (
-          <Canvas
-            style={{ width: "100%", height: "100%" }}
-            camera={{ position: [0, 0, 5] }}
-          >
-            <ambientLight />
-            <Model objText={objText} />
-            <OrbitControls />
-          </Canvas>
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              width: "400px",
-              height: "400px",
-              alignItems: "center",
-              justifyContent: "center",
-              height: "100%",
-              color: "#999",
-            }}
-          >
-            Mesh is coming ...
-          </div>
-        )}
+          {loading ? (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                height: "100%",
+                color: "#999",
+              }}
+            >
+              Mesh is coming ...
+            </div>
+          ) : objText ? (
+            <Canvas
+              style={{ width: "100%", height: "100%" }}
+              camera={{ position: [0, 0, 5] }}
+            >
+              <ambientLight />
+              <Model objText={objText} />
+              <OrbitControls />
+            </Canvas>
+          ) : null}
         </div>
 
         {/* 右: SVG */}
