@@ -14,6 +14,8 @@ export default function App() {
     if (!file) return;
 
     setLoading(true);
+    setSvgUrl(null);
+    setObjText(null);
     setImgUrl(URL.createObjectURL(file));
 
     try {
@@ -108,17 +110,37 @@ export default function App() {
         {/* 中: OBJ */}
         <div
           style={{
+            width: "400px",
             height: "400px",
             border: "1px solid #ccc",
             borderRadius: "8px",
             overflow: "hidden",
           }}
         >
-          <Canvas style={{ width: "100%", height: "100%" }} camera={{ position: [0, 0, 5] }}>
+          {objText ? (
+          <Canvas
+            style={{ width: "100%", height: "100%" }}
+            camera={{ position: [0, 0, 5] }}
+          >
             <ambientLight />
             <Model objText={objText} />
             <OrbitControls />
           </Canvas>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              width: "400px",
+              height: "400px",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100%",
+              color: "#999",
+            }}
+          >
+            Mesh is coming ...
+          </div>
+        )}
         </div>
 
         {/* 右: SVG */}
