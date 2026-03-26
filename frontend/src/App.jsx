@@ -14,7 +14,6 @@ export default function App() {
     if (!file) return;
 
     setLoading(true);
-    // 画像表示
     setImgUrl(URL.createObjectURL(file));
 
     try {
@@ -32,8 +31,6 @@ export default function App() {
       if (!res1.ok) throw new Error("image-to-obj failed");
 
       const objBlob = await res1.blob();
-
-      // OBJ表示用
       const objText = await objBlob.text();
       setObjText(objText);
 
@@ -41,7 +38,6 @@ export default function App() {
       // OBJ → SVG
       // -------------------------------
       const objFile = new File([objBlob], "generated.obj");
-
       const formData2 = new FormData();
       formData2.append("file", objFile);
 
@@ -53,13 +49,13 @@ export default function App() {
       if (!res2.ok) throw new Error("obj-to-svg failed");
 
       const svgBlob = await res2.blob();
-      const svgUrl = URL.createObjectURL(svgBlob);
-
-      setSvgUrl(svgUrl);
-      setLoading(false);
+      const url = URL.createObjectURL(svgBlob);
+      setSvgUrl(url);
 
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -80,28 +76,45 @@ export default function App() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column" }}>
 
-      <div style={{ display: "flex", gap: "1rem" }}>
+      {/* タイトル */}
+      <h1
+        style={{
+          textAlign: "center",
+          margin: 0,
+          padding: "16px",
+          borderBottom: "1px solid #ddd",
+          background: "#fafafa",
+        }}
+      >
+        Pattern Generator
+      </h1>
+
+      {/* メイン */}
+      <div style={{ flex: 1, display: "flex", gap: "1rem", padding: "1rem" }}>
 
         {/* 左: 画像 */}
-        <div style={{ width: 400 }}>
-          {imgUrl && <img src={imgUrl} style={{ width: "100%" }} />}
-          {/* アップロード（画像のみ） */}
+        <div style={{ flex: 1 }}>
+          {imgUrl && (
+            <img
+              src={imgUrl}
+              style={{ width: "100%", objectFit: "contain" }}
+            />
+          )}
           <input type="file" accept="image/*" onChange={handleUploadImg} />
         </div>
 
-        <div style={{ width: 400, height: 400, display: loading ? "block" : "none"}}>
-          {loading && (
-            <div style={{ textAlign: "center", paddingTop: "50%" }}>
-              ⏳ Generating Pattern...
-            </div>
-          )}
-        </div>
-
         {/* 中: OBJ */}
-        <div style={{ width: 400, height: 400, border: "1px solid black" }}>
-          <Canvas camera={{ position: [0, 0, 5] }}>
+        <div
+          style={{
+            flex: 1,
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            overflow: "hidden",
+          }}
+        >
+          <Canvas style={{ width: "100%", height: "100%" }} camera={{ position: [0, 0, 5] }}>
             <ambientLight />
             <Model objText={objText} />
             <OrbitControls />
@@ -109,8 +122,49 @@ export default function App() {
         </div>
 
         {/* 右: SVG */}
-        <div style={{ width: 400 }}>
-          {svgUrl && <img src={svgUrl} style={{ width: "100%" }} />}
+        <div style={{ flex: 1 }}>
+          <div style={{ height: "100%" }}>
+            {loading ? (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "100%",
+                }}
+              >
+                ⏳ Generating Pattern...
+              </div>
+            ) : (
+              svgUrl && (
+                <>
+                  <img
+                    src={svgUrl}
+                    style={{ width: "100%", objectFit: "contain" }}
+                  />
+
+                  <a
+                    href={svgUrl}
+                    download="pattern.svg"
+                    style={{
+                      display: "block",
+                      marginTop: "10px",
+                      textAlign: "center",
+                      padding: "8px",
+                      border: "1px solid #ccc",
+                      borderRadius: "6px",
+                      textDecoration: "none",
+                      color: "black",
+                      background: "#f5f5f5",
+                      cursor: "pointer",
+                    }}
+                  >
+                    ⬇ Download SVG
+                  </a>
+                </>
+              )
+            )}
+          </div>
         </div>
 
       </div>
