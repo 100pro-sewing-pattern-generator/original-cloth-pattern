@@ -182,8 +182,13 @@ async def predict(file: UploadFile = File(...)):
         in shape_experiment.NN_config()["loss"]["loss_components"],
     )
 
-    svg_file = save_dir / "tpose/tpose_pattern.svg"
+    file_stem = Path(input_path).stem  # dress4
 
+    svg_file = (
+        save_dir
+        / f"{file_stem}"
+        / f"{file_stem}_pattern.svg"
+    )
     # -------------------------------
     # download
     # -------------------------------
