@@ -7,11 +7,13 @@ export default function App() {
   const [objText, setObjText] = useState(null);
   const [svgUrl, setSvgUrl] = useState(null);
   const [imgUrl, setImgUrl] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleUploadImg = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
+    setLoading(true);
     // 画像表示
     setImgUrl(URL.createObjectURL(file));
 
@@ -54,6 +56,7 @@ export default function App() {
       const svgUrl = URL.createObjectURL(svgBlob);
 
       setSvgUrl(svgUrl);
+      setLoading(false);
 
     } catch (err) {
       console.error(err);
@@ -79,18 +82,25 @@ export default function App() {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
 
-      {/* アップロード（画像のみ） */}
-      <input type="file" accept="image/*" onChange={handleUploadImg} />
-
       <div style={{ display: "flex", gap: "1rem" }}>
 
         {/* 左: 画像 */}
         <div style={{ width: 400 }}>
           {imgUrl && <img src={imgUrl} style={{ width: "100%" }} />}
+          {/* アップロード（画像のみ） */}
+          <input type="file" accept="image/*" onChange={handleUploadImg} />
+        </div>
+
+        <div style={{ width: 400, height: 400, display: loading ? "block" : "none"}}>
+          {loading && (
+            <div style={{ textAlign: "center", paddingTop: "50%" }}>
+              ⏳ Generating Pattern...
+            </div>
+          )}
         </div>
 
         {/* 中: OBJ */}
-        <div style={{ width: 400, height: 400 }}>
+        <div style={{ width: 400, height: 400, border: "1px solid black" }}>
           <Canvas camera={{ position: [0, 0, 5] }}>
             <ambientLight />
             <Model objText={objText} />
