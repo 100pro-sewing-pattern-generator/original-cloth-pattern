@@ -25,7 +25,7 @@ export default function App() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const res1 = await fetch("http://localhost:8000/image-to-obj", {
+      const res1 = await fetch("http://localhost:8001/image-to-obj", {
         method: "POST",
         body: formData,
       });
