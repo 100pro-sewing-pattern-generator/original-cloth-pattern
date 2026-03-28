@@ -10,11 +10,18 @@ services:
       - "5173:5173"
     command: npm run dev -- --host 0.0.0.0
 
-  # mesh-generator:
-  #   build: ./mesh-generator
-  #   container_name: mesh-generator
-  #   ports:
-  #     - "8001:8000"
+  mesh-generator:
+    image: mikimiki2002/garverselod:latest
+    container_name: mesh-generator
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./backend/mesh-generator/demo/dress_demo/inputs:/workspace/GarVerseLOD/demo/dress_demo/inputs
+      - ./backend/mesh-generator/demo/dress_demo/outputs:/workspace/GarVerseLOD/demo/dress_demo/outputs
+      - ./backend/mesh-generator/demo/dress_demo/support_data:/workspace/GarVerseLOD/demo/dress_demo/support_data
+      - ./backend/mesh-generator/demo/dress_demo/1_coarse/ICON_get_smpl/data:/workspace/GarVerseLOD/demo/dress_demo/1_coarse/ICON_get_smpl/data
+    working_dir: /workspace/GarVerseLOD/demo/dress_demo
+
 
   pattern-estimator:
     build: ./backend/pattern-generator
