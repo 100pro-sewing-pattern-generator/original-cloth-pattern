@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  garment:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/workspace/GarVerseLOD
+    working_dir: /workspace/GarVerseLOD/demo/dress_demo
+    tty: true
