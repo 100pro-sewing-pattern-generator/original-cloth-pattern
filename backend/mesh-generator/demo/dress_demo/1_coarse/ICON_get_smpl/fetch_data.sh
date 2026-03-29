@@ -1,6 +1,8 @@
 #!/bin/bash
 urle () { [[ "${1}" ]] || return 1; local LANG=C i x; for (( i = 0; i < ${#1}; i++ )); do x="${1:i:1}"; [[ "${x}" == [a-zA-Z0-9.~-] ]] && echo -n "${x}" || printf '%%%02X' "'${x}"; done; echo; }
 
+cd ./backend/mesh-generator/demo/dress_demo/1_coarse/ICON_get_smpl/
+
 mkdir -p data/smpl_related/models
 
 # username and password input
@@ -36,6 +38,8 @@ cd data && unzip icon_data.zip
 mv smpl_data smpl_related/
 rm -f icon_data.zip
 cd ..
+
+cd ../../../../../
 
 function download_for_training () {
     
