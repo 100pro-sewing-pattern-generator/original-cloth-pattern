@@ -20,6 +20,7 @@ services:
       - ./backend/mesh-generator/demo/dress_demo/outputs:/workspace/GarVerseLOD/demo/dress_demo/outputs
       - ./backend/mesh-generator/demo/dress_demo/support_data:/workspace/GarVerseLOD/demo/dress_demo/support_data
       - ./backend/mesh-generator/demo/dress_demo/1_coarse/ICON_get_smpl/data:/workspace/GarVerseLOD/demo/dress_demo/1_coarse/ICON_get_smpl/data
+      - ./models/u2net.onnx:/root/.u2net/u2net.onnx
     working_dir: /workspace/GarVerseLOD/demo/dress_demo
 
 

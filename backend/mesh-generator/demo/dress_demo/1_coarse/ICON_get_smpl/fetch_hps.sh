@@ -1,5 +1,6 @@
 urle () { [[ "${1}" ]] || return 1; local LANG=C i x; for (( i = 0; i < ${#1}; i++ )); do x="${1:i:1}"; [[ "${x}" == [a-zA-Z0-9.~-] ]] && echo -n "${x}" || printf '%%%02X' "'${x}"; done; echo; }
 
+cd ./backend/mesh-generator/demo/dress_demo/1_coarse/ICON_get_smpl/
 
 # download mesh_downsampling file
 mkdir -p data/HPS/pymaf_data && cd data/HPS/pymaf_data/
@@ -15,6 +16,8 @@ rm -rf data && rm -f data.tar.gz
 gdown https://drive.google.com/drive/u/1/folders/1CkF79XRaZzdRlj6eJUt4W0nbTORv2t7O -O pretrained_model --folder
 cd ../../..
 echo "PyMAF done!"
+
+cd ../../../../../
 
 function download_pare(){
     # (optional) download PARE
