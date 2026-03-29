@@ -1,4 +1,31 @@
 # original-cloth-pattern
+
+本プロジェクトは、以下の2つの論文を参考に実装したシステムです。
+
+## References
+
+## References
+
+本プロジェクトでは以下の論文および実装を参考にしています。
+
+### GarVerseLOD
+- **論文**
+  High-Fidelity 3D Garment Reconstruction from a Single In-the-Wild Image using a Dataset with Levels of Details
+  https://arxiv.org/abs/2411.03047
+
+- **GitHub**
+  https://github.com/zhongjinluo/GarVerseLOD
+
+---
+
+### NeuralTailor
+- **論文**
+  Reconstructing Sewing Pattern Structures from 3D Point Clouds of Garments
+  https://arxiv.org/abs/2201.13063
+
+- **GitHub**
+  https://github.com/maria-korosteleva/Garment-Pattern-Estimation
+
 ## 実行方法
 ## git clone
 `git clone git@github.com:100pro-sewing-pattern-generator/original-cloth-pattern.git`
@@ -28,6 +55,12 @@ https://drive.google.com/file/d/1ylz5EoVFPmEAhO1cwUjO_zfa-oz5n608/view
 `mkdir -p ./models`
 
 `wget https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx -O ./models/u2net.onnx`
+
+## Dockerのメモリ設定
+このプロジェクトはメモリをたくさん使うため、dockerのRAMメモリを16Gに調整します。
+
+![gallery](./assets/docker_memory.png)
+
 
 ## DockerのImageの作成
 `docker compose pull`
