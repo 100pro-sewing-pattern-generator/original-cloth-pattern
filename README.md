@@ -38,7 +38,7 @@
 
 https://drive.google.com/file/d/1ylz5EoVFPmEAhO1cwUjO_zfa-oz5n608/view
 
-ダウンロード後解体し、`support_data` 、/backend/mesh-generator/demo/dress_demo/に配置してください。
+ダウンロード後解体し(`support_data`)、/backend/mesh-generator/demo/dress_demo/に配置してください。
 
 ### ICONのダウンロード
 `https://icon.is.tue.mpg.de/` ここでユーザーネームと、パスワードを入力しサインインします
