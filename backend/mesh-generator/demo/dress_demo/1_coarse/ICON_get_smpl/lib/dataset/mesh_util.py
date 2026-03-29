@@ -33,8 +33,8 @@ from lib.common.render_utils import Pytorch3dRasterizer, face_vertices
 
 from pytorch3d.renderer.mesh import rasterize_meshes
 from PIL import Image, ImageFont, ImageDraw
-from kaolin.ops.mesh import check_sign
-from kaolin.metrics.trianglemesh import point_to_mesh_distance
+# from kaolin.ops.mesh import check_sign
+# from kaolin.metrics.trianglemesh import point_to_mesh_distance
 
 from pytorch3d.loss import (mesh_laplacian_smoothing, mesh_normal_consistency)
 
