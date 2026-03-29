@@ -76,3 +76,6 @@ https://drive.google.com/file/d/1ylz5EoVFPmEAhO1cwUjO_zfa-oz5n608/view
 
 画像をアップロードすると、左にアップロードされた画像、真ん中に3D画像、右に型パターンが表示されます。
 ![gallery](./assets/demo.png)
+
+### デモ動画
+https://drive.google.com/file/d/1bqw1g4vKhnC68ag96qTiGDBD2t_YPuSZ/view?usp=sharing
