@@ -20,9 +20,9 @@ https://drive.google.com/file/d/1ylz5EoVFPmEAhO1cwUjO_zfa-oz5n608/view
 
 下の二つのコマンドで、ダウンロードします。
 
-`bash backend/mesh-generator-demo/dress_demo/1_coarse/ICON_get_smpl/fetch_data.sh`
+`bash backend/mesh-generator/demo/dress_demo/1_coarse/ICON_get_smpl/fetch_data.sh`
 
-`bash backend/mesh-generator-demo/dress_demo/1_coarse/ICON_get_smpl/fetch_hps.sh`
+`bash backend/mesh-generator/demo/dress_demo/1_coarse/ICON_get_smpl/fetch_hps.sh`
 
 ### 背景除去モデルのダウンロード
 `mkdir -p ./models`
